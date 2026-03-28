@@ -26,6 +26,96 @@ Global recycling rates remain low due to "wish-cycling" — consumers throwing n
 - **Impact Gamification** - Carbon savings tracking with 5 achievement badges (Beginner → Master)
 
 ---
+## 📊 Dataset Used and Preprocessing
+
+### Dataset Source
+We used the **Garbage Classification Dataset** from Kaggle to evaluate our AI system's performance. This dataset contains images of various waste items across 6 categories.
+
+| Category | Number of Images |
+|----------|------------------|
+| Plastic | 482 |
+| Glass | 501 |
+| Metal | 410 |
+| Paper | 594 |
+| Cardboard | 403 |
+| Trash | 137 |
+| **Total** | **2,527** |
+
+**Dataset Link:** [Kaggle - Garbage Classification](https://www.kaggle.com/datasets/mostafaabla/garbage-classification)
+
+---
+
+### Data Preprocessing Steps
+
+Since our system uses the Gemini API (which accepts raw images), we performed minimal preprocessing:
+
+#### 1. **Dataset Organization**
+- Downloaded the Kaggle dataset as a ZIP file
+- Extracted images into category folders
+- Organized folder structure:
+- 
+#### 2. **Image Selection**
+- Selected **20-50 images per category** for evaluation
+- Ensured variety in:
+- Lighting conditions (bright, dim, natural)
+- Backgrounds (plain, cluttered, outdoor)
+- Angles (front, side, top-down)
+- Item conditions (clean, dirty, crushed)
+
+#### 3. **Image Preprocessing**
+| Step | Description |
+|------|-------------|
+| **Format** | All images converted to JPEG format |
+| **Encoding** | Images encoded to base64 for API transmission |
+| **Resolution** | Original resolution preserved (API handles resizing) |
+| **Color Space** | RGB format maintained |
+
+#### 4. **Ground Truth Labeling**
+- Each image manually verified for correct category
+- Categories mapped to standard waste types:
+- `plastic` → `plastic_bottle` (PET, HDPE, etc.)
+- `glass` → `glass_bottle`
+- `metal` → `aluminum_can`
+- `paper` → `paper` (newspaper, office paper)
+- `cardboard` → `cardboard`
+- `trash` → `mixed_waste` (non-recyclable items)
+
+#### 5. **Evaluation Dataset Summary**
+
+| Category | Images Used | Purpose |
+|----------|-------------|---------|
+| Plastic Bottle | 20 | Testing classification accuracy |
+| Glass Bottle | 20 | Testing resin code detection |
+| Aluminum Can | 20 | Testing metal identification |
+| Cardboard | 20 | Testing paper-based items |
+| Paper | 20 | Testing paper vs cardboard distinction |
+| Mixed Waste | 20 | Testing non-recyclable detection |
+| **Total** | **120** | |
+
+#### 6. **Preprocessing Code Example**
+
+```python
+# Sample preprocessing used in evaluation
+import base64
+from PIL import Image
+import io
+
+def preprocess_image(image_path):
+  """Prepare image for API call"""
+  # Read image
+  img = Image.open(image_path)
+  
+  # Convert to RGB if needed
+  if img.mode != 'RGB':
+      img = img.convert('RGB')
+  
+  # Encode to base64 for API
+  buffer = io.BytesIO()
+  img.save(buffer, format='JPEG', quality=90)
+  img_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+  
+  return img_base64
+
 
 ## 🏗️ Tech Stack
 
