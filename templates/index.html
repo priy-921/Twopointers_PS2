@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Classification System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Waste Classification System</h1>
+                <p>AI-Powered Recycling Assistant</p>
+            </div>
+        </header>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-value" id="totalCarbon">0</span>
+                <span class="stat-label">CO₂ Saved (g)</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value" id="itemsRecycled">0</span>
+                <span class="stat-label">Recycled</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value" id="itemsSorted">0</span>
+                <span class="stat-label">Total Scans</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-value" id="currentBadgeIcon">🌱</span>
+                <span class="stat-label" id="currentBadgeName">Beginner</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-container">
+            <!-- Camera Section -->
+            <div class="camera-card">
+                <div class="card-header">
+                    <span class="card-title">Camera Feed</span>
+                </div>
+                <div class="video-wrapper">
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="analyzeImage()">Analyze</button>
+                    <button class="btn btn-secondary" id="autoDetectBtn" onclick="toggleAutoDetect()">Auto Detect</button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-card">
+                <div class="card-header">
+                    <span class="card-title">Analysis Results</span>
+                </div>
+                <div class="results-content" id="result">
+                    <div class="empty-state">
+                        <p>Ready to analyze</p>
+                        <p class="empty-sub">Position waste item in frame and click Analyze</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-card">
+            <div class="card-header">
+                <span class="card-title">Recent Activity</span>
+            </div>
+            <div id="history" class="history-content">
+                <p class="empty-history">No scans recorded</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
