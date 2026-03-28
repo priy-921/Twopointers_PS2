@@ -2,7 +2,7 @@
 
 **Team Name:** twopointers  
 **Problem Statement:** PS2 - The Eco-Label Vision: AI-Powered Circular Economy
-
+**Video Link** : https://drive.google.com/file/d/1qaDNOU4cMfVNVoNk0CJxHgk5wx_pLuXk/view?usp=sharing
 ---
 
 ## 📌 Overview
@@ -161,14 +161,7 @@ Pyrim-PS2/
 **Resin Code OCR:** 85% accuracy when code is clearly visible
 
 ---
- Key Features
-- Real-time webcam detection
-- AI waste classification (Gemini API)
-- Resin code recognition (1-7)
-- Instant disposal instructions
-- CO₂ savings tracker
-- Auto-scan mode
-- CSV export
+
 ## 🚀 Installation
 
 ```bash
