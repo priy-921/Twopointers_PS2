@@ -115,7 +115,23 @@ def preprocess_image(image_path):
   img_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
   
   return img_base64
-
+Project Structure
+Pyrim-PS2/
+├── .gitignore
+├── app.py
+├── README.md
+├── templates/
+│   └── index.html
+├── static/
+│   ├── style.css
+│   └── js/
+│       └── app.js
+├── venv/
+│   ├── bin/
+│   ├── include/
+│   ├── lib/
+│   └── pyvenv.cfg
+└── [No other files]
 
 ## 🏗️ Tech Stack
 
@@ -145,7 +161,14 @@ def preprocess_image(image_path):
 **Resin Code OCR:** 85% accuracy when code is clearly visible
 
 ---
-
+ Key Features
+- Real-time webcam detection
+- AI waste classification (Gemini API)
+- Resin code recognition (1-7)
+- Instant disposal instructions
+- CO₂ savings tracker
+- Auto-scan mode
+- CSV export
 ## 🚀 Installation
 
 ```bash
